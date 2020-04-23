@@ -1,0 +1,16 @@
+rails g scaffold post title author body:text
+
+#deletar scaffold.scss
+
+rails g model comment post:references author body:text
+
+gem 'rails-i18n'
+
+# config/application.rb
+config.i18n.default_locale = 'pt-BR'
+config.time_zone = 'Brasilia'
+
+# criar config/locale/pt-BR.yml
+pt-BR:
+
+

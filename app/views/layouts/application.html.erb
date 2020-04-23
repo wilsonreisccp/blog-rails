@@ -10,8 +10,24 @@
   </head>
 
   <body>
-    <h1>TESTEEEEEEE..</h1>
+    <header class='bg-primary text-white text-center mb-4 p-4'>
+      <%= link_to root_path, class: 'text-white' do %>
+        <h1 class="display-5">Blog do Will</h1>
+      <% end %>
 
-    <%= yield %>
+      <p class="lead">
+        Olá, aqui você vai encontrar artigos sobre programação, tecnologia e carreira.
+      </p>
+    </header>
+
+    <main class="container">
+      <%= yield %>
+    </main>
+
+    <footer class="bg-primary text-white text-center mt-5 p-4">
+      Copyrigth © Wilson Reis <%= Date.current.year %>
+    </footer>
+
+    
   </body>
 </html>
