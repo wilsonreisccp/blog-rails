@@ -1,19 +1,48 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="shadow p-3 mb-5 bg-white rounded">
+  <div class="px-5">
+    <h1><%= @post.title %></h1>
+    <p class="text-muted">
+      <strong>Por <%= @post.author %></strong><br>
+      <%= l @post.created_at, format: :long %>
+    </p>
 
-<p>
-  <strong>Author:</strong>
-  <%= @post.author %>
-</p>
+  </div>
+  
+  <div class="px-5">
+    <%= @post.body.gsub("\n","<br>").html_safe %>
+  </div>
+  
+</div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
-</p>
+<div class="m-5">
+  <div class="text-center">
+    <h4>
+      <%= pluralize( @post.comments.count, 'Comentário' ) %>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+      <% if @post.comments.count.zero? %>
+        <span class="badge badge-success">Seja o primeiro a comentar!</span>
+      <% end %>
+    </h4>
+
+  </div>
+
+  <%= form_with model: @comment, local: true do |form| %>
+    <!-- campo id escondido --> 
+    <%= form.hidden_field :post_id, value: @post.id %>
+
+    <div class="form-group">
+      <%= form.label :author %>
+      <%= form.text_field :author, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :body %>
+      <%= form.text_area :body, class: 'form-control', rows: 2 %>
+    </div>
+
+    <%= form.submit 'Enviar', class: 'btn btn-primary', data: {disable_with: 'Enviando...'} %>
+
+  <% end %>
+
+</div>
