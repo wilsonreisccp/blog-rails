@@ -28,7 +28,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'rails-i18n'
 
-gem 'pry'
+gem 'friendly_id'
+#pg_search para fazer buscar (funciona apenas no postgreSQL)
+gem 'pg_search'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

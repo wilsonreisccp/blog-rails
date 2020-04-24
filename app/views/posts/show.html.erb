@@ -34,12 +34,12 @@
 
       <div class="form-group">
         <%= form.label :author %>
-        <%= form.text_field :author, class: 'form-control' %>
+        <%= form.text_field :author, class: 'form-control', required: true %>
       </div>
 
       <div class="form-group">
         <%= form.label :body %>
-        <%= form.text_area :body, class: 'form-control', rows: 2 %>
+        <%= form.text_area :body, class: 'form-control', rows: 2, required: true %>
       </div>
 
       <%= form.submit 'Enviar', class: 'btn btn-primary', data: {disable_with: 'Enviando...'} %>
@@ -49,21 +49,19 @@
 
   <% @comments.each do |item| %>
     <div class="shadow-sm m-3 p-3 db-light rounded">
+      
       <div class="row">
         <div class="col">
-          <%= item.body %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <strong>Por <%= item.author %></strong><br>
+          <!--sanitize serve para segurança em texto malicioso -->
+          <%= sanitize(item.body.gsub("\n","<br>")).html_safe %>
         </div>
 
         <div class="col text-right">
+          <strong>Por <%= item.author %></strong><br>
           <p class="text-muted">
             <em data-toggle="tooltip" 
               data-placement="top" 
-              title="<%= l @post.created_at, format: :long %>"
+              title="<%= l item.created_at, format: :long %>"
             >
               <%= time_ago_in_words item.created_at %> atrás
             </em>
@@ -72,8 +70,7 @@
       </div>
 
       <hr>
-      <!--sanitize serve para segurança em texto malicioso -->
-      <%= sanitize(item.body.gsub("\n","<br>")).html_safe %>
+      
       
     </div>
   <% end %>
